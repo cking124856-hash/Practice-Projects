@@ -6,9 +6,9 @@ GAME_HEIGHT = 700
 GAME_SPEED = 50
 SPACE_SIZE = 25
 BODY_PARTS = 3
-SNAKE_COLOUR = "#00FF00"
-FOOD_COLOUR = "#FF0000"
-BACKGROUND_COLOUR = "#000000"
+SNAKE_COLOUR = "#4B4E6D"
+FOOD_COLOUR = "#84DCC6"
+BACKGROUND_COLOUR = "#95A3B3"
 
 
 
@@ -55,10 +55,12 @@ def next_turn(snake, food):
 
     snake.squares.insert(0, square)
 
-    if x == food.coordinates[0] and y == food.coordinates[1]:
+    if x == food.coordinates[0] and y == food.coordinates[-1]:
         global score
 
         score += 1
+        snake.body_size += 1
+        snake.coordinates.append(snake.coordinates[1])
 
         label.config(text="Score:{}".format(score))
 
@@ -79,6 +81,7 @@ def next_turn(snake, food):
         window.after(GAME_SPEED, next_turn, snake, food)
 
     #window.after(GAME_SPEED, next_turn, snake, food)
+    # Dupilicate call to next_turn removed to avoid redundancy
 
 def change_direction(new_direction):
 
