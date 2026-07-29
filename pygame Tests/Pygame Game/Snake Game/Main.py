@@ -59,8 +59,8 @@ def next_turn(snake, food):
         global score
 
         score += 1
-        snake.body_size += 1
-        snake.coordinates.append(snake.coordinates[1])
+        snake.squares.insert(0, square)
+        # Add a new square for the snake's body at the last position of the snake's tail as the snake grows
 
         label.config(text="Score:{}".format(score))
 
